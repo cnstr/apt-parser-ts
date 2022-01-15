@@ -1,4 +1,4 @@
-function parseKV(data: string) {
+export function parseKV(data: string) {
 	const cleanedData = data.replaceAll(/\r\n|\r|\n/g, '\n').replaceAll(/\0/g, '').normalize().trim()
 	const lineChunks = cleanedData.split('\n') // We know it will always be \n because of our cleanup
 
