@@ -1,0 +1,6 @@
+node_modules/
+test/
+index.test.ts
+index.ts
+jest.config.js
+tsconfig.json
