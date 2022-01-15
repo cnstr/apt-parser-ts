@@ -1,0 +1,53 @@
+{
+	"name": "apt-parser",
+	"version": "1.0.0",
+	"description": "Parse APT's key-value files and retrieve all the values as a Map",
+	"author": "Canister <support@canister.me> (https://canister.me)",
+	"contributors": [
+		"Aarnav Tale <aarnav@tale.me> (https://aarnavtale.com)"
+	],
+	"license": "MIT",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"require": "./dist/index.js",
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"scripts": {
+		"build": "tsup index.ts --format cjs,esm --dts --clean --minify",
+		"prepublishOnly": "pnpm run build",
+		"test": "jest"
+	},
+	"keywords": [
+		"apt",
+		"dpkg",
+		"parser",
+		"release",
+		"packages",
+		"aptitude",
+		"debian",
+		"linux",
+		"packaging",
+		"canister"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cnstr/apt-parser.git"
+	},
+	"bugs": {
+		"url": "https://github.com/cnstr/apt-parser/issues"
+	},
+	"homepage": "https://github.com/cnstr/apt-parser#readme",
+	"devDependencies": {
+		"@types/jest": "^27.4.0",
+		"got": "^12.0.1",
+		"jest": "^27.4.7",
+		"ts-jest": "^27.1.3",
+		"tsup": "^5.11.11",
+		"typescript": "^4.5.4"
+	}
+}
