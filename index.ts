@@ -59,17 +59,17 @@ export function parseKV(data: string) {
 	return fields
 }
 
-export function packages(data: string) {
+export function parsePackages(data: string) {
 	const cleanedData = data.replaceAll(/\r\n|\r|\n/g, '\n').replaceAll(/\0/g, '').normalize().trim()
 	const packageChunks = cleanedData.split('\n\n') // We know it will always be \n\n because of our cleanup
 	return packageChunks.map(chunk => parseKV(chunk))
 }
 
-export function control(data: string) {
-	return packages(data)
+export function parseControl(data: string) {
+	return parsePackages(data)
 }
 
-export function release(data: string) {
+export function parseRelease(data: string) {
 	const mapped = parseKV(data)
 
 	// Let's make hashes into an object with all files
