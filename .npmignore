@@ -3,4 +3,5 @@ test/
 index.test.ts
 index.ts
 jest.config.js
+pnpm-lock.yaml
 tsconfig.json
