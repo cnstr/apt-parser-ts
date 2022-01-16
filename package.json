@@ -20,6 +20,7 @@
 	"scripts": {
 		"build": "tsup index.ts --format cjs,esm --dts --clean --minify",
 		"prepublishOnly": "pnpm run build",
+		"push": "np",
 		"test": "jest"
 	},
 	"keywords": [
@@ -44,6 +45,7 @@
 	"devDependencies": {
 		"@types/jest": "^27.4.0",
 		"jest": "^27.4.7",
+		"np": "^7.6.0",
 		"ts-jest": "^27.1.3",
 		"tsup": "^5.11.11",
 		"typescript": "^4.5.4"
