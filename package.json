@@ -18,7 +18,7 @@
 		}
 	},
 	"scripts": {
-		"build": "tsup index.ts --format cjs,esm --dts --clean --minify",
+		"build": "tsup ./src/index.ts --format cjs,esm --dts --clean --minify",
 		"prepublishOnly": "pnpm run build",
 		"push": "np",
 		"test": "jest"

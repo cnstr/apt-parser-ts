@@ -1,3 +1,5 @@
+export * from './release'
+
 export function parseKV(data: string) {
 	const cleanedData = data.replaceAll(/\r\n|\r|\n/g, '\n').replaceAll(/\0/g, '').normalize().trim()
 	const lineChunks = cleanedData.split('\n') // We know it will always be \n because of our cleanup
@@ -35,7 +37,6 @@ export function parseKV(data: string) {
 					const appendContent = (existingContent + appendLine).replace(/\s+/g, ' ').trim()
 					fields.set(previousKey, appendContent)
 				}
-
 			}
 
 			continue
@@ -69,6 +70,13 @@ export function parseControl(data: string) {
 	return parsePackages(data)
 }
 
+/**
+ * Parse raw file contents of a release file and retrieve a map of keys and values
+ *
+ * @deprecated Use the `Release` class instead
+ * @param data Raw string contents from a Release file
+ * @returns Map of string keys and values
+ */
 export function parseRelease(data: string) {
 	const mapped = parseKV(data)
 
