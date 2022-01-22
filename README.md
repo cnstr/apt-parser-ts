@@ -23,7 +23,7 @@ console.log(releaseMap.get('InvalidKey')); // => null
 Here's an example for getting the information out of a Packages file:<br>
 ```ts
 import axios from 'axios';
-import { parseRelease } from 'apt-parser';
+import { parsePackages } from 'apt-parser';
 
 const { data } = await axios.get('https://repo.chariz.com/Packages');
 const packages = parsePackages(data);
