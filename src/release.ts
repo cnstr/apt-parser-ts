@@ -99,7 +99,7 @@ export class Release {
 	 * For the technical specification, see:
 	 * https://wiki.debian.org/DebianRepository/Format#Version
 	 */
-	version?: string // TODO: DebianVersion type
+	version?: string
 
 	/**
 	 * Parsed date string from the repository.
