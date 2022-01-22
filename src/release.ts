@@ -16,10 +16,7 @@ type ReleaseHash = {
  * It will populate the strictly typed fields and also leave the raw-string value and key.
  */
 export class Release {
-	/**
-	 * Raw key-value map of Release fields
-	 */
-	raw: Map<string, string>
+	private raw: Map<string, string>
 
 	/**
 	 * Parsed array of strings depicting the supported architectures.
@@ -275,9 +272,26 @@ export class Release {
 	}
 
 	/**
+	 * Get a raw string value from the Release contents
+	 * @param {string} key Release field name to search for
+	 * @returns {string?} Field value
+	 */
+	get(key: string): string | undefined {
+		return this.raw.get(key)
+	}
+
+	/**
+	 * Retrieve the number of fields defined in the Release contents
+	 * @returns {number} Field count
+	 */
+	get fieldCount(): number {
+		return this.raw.size
+	}
+
+	/**
 	 * Convert APT Release hash keys to the appropriate ones on this class
 	 * @param {string} key Release hash key
-	 * @returns {string} Class property name
+	 * @returns {string?} Class property name
 	 */
 	private getHashIndex(key: string): string | undefined {
 		switch (key) {

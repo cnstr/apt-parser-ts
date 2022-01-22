@@ -6,7 +6,7 @@ test('release:chariz', async () => {
 	const data = await readFile('test/chariz.release', 'utf8')
 	const release = new Release(data)
 
-	expect(release.raw.size).toEqual(11)
+	expect(release.fieldCount).toEqual(11)
 	expect(release.architectures).toEqual(expect.arrayContaining(['iphoneos-arm']))
 	expect(release.noSupportForArchitectureAll).toBeUndefined()
 	expect(release.description).toEqual('Check out what’s new and download purchases from the Chariz marketplace!')
@@ -36,7 +36,7 @@ test('release:jammy', async () => {
 	const data = await readFile('test/jammy.release', 'utf8')
 	const release = new Release(data)
 
-	expect(release.raw.size).toEqual(13)
+	expect(release.fieldCount).toEqual(13)
 	expect(release.architectures).toEqual(expect.arrayContaining([
 		'amd64',
 		'arm64',
