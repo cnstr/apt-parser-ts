@@ -1,6 +1,6 @@
 import { parseKV } from '.'
 
-type ReleaseHash = {
+export type ReleaseHash = {
 	filename: string
 	hash: string
 	size: number
