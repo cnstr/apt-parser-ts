@@ -1,5 +1,10 @@
-export * from './release'
+export * from 'release'
 
+/**
+ * Parse raw file contents that conform to the APT key-value format
+ * @param data Raw data
+ * @returns A key-value map of raw-value strings
+ */
 export function parseKV(data: string) {
 	const cleanedData = data.replaceAll(/\r\n|\r|\n/g, '\n').replaceAll(/\0/g, '').normalize().trim()
 	const lineChunks = cleanedData.split('\n') // We know it will always be \n because of our cleanup
@@ -59,12 +64,24 @@ export function parseKV(data: string) {
 	return fields
 }
 
+/**
+ * Parse raw file contents of a packages file and retrieve a map of keys and values
+ *
+ * @param data Raw string contents from a Packages file
+ * @returns Map of string keys and values
+ */
 export function parsePackages(data: string) {
 	const cleanedData = data.replaceAll(/\r\n|\r|\n/g, '\n').replaceAll(/\0/g, '').normalize().trim()
 	const packageChunks = cleanedData.split('\n\n') // We know it will always be \n\n because of our cleanup
 	return packageChunks.map(chunk => parseKV(chunk))
 }
 
+/**
+ * Parse raw file contents of a control file and retrieve a map of keys and values
+ *
+ * @param data Raw string contents from a control file
+ * @returns Map of string keys and values
+ */
 export function parseControl(data: string) {
 	return parsePackages(data)
 }
