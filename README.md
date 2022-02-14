@@ -17,7 +17,7 @@ const release = new Release(data);
 
 console.log(release.origin); // => Ubuntu
 console.log(release.version); // => 22.04
-console.log(releaseMap.get('InvalidKey')); // => null
+console.log(release.get('InvalidKey')); // => null
 ```
 
 A full Release object has the following properties attached on it, all of which map to documented APT fields.<br>
