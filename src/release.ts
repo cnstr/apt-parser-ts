@@ -76,7 +76,7 @@ export class Release {
 	 * For the technical specification, see:
 	 * https://wiki.debian.org/DebianRepository/Format#Suite
 	 */
-	suite: string
+	suite: string | undefined
 
 	/**
 	 * Codename identifier specified in the repository release.
@@ -86,7 +86,7 @@ export class Release {
 	 * For the technical specification, see:
 	 * https://wiki.debian.org/DebianRepository/Format#Codename
 	 */
-	codename: string
+	codename: string | undefined
 
 	/**
 	 * Version string set by the repository.
@@ -233,8 +233,12 @@ export class Release {
 		this.description = map.get('Description')?.trim()
 		this.origin = map.get('Origin')?.trim()
 		this.label = map.get('Label')?.trim()
-		this.suite = map.get('Suite')!.trim()
-		this.codename = map.get('Codename')!.trim()
+
+		// There must be a suite or codename but we do not enforce
+		// Our solution was to make them required but nullable
+		this.suite = map.get('Suite')?.trim()
+		this.codename = map.get('Codename')?.trim()
+
 		this.version = map.get('Version')?.trim()
 		this.date = map.get('Date') ? new Date(map.get('Date')!) : undefined
 		this.validUntil = map.get('Valid-Until') ? new Date(map.get('Valid-Until')!) : undefined
