@@ -1,4 +1,5 @@
-import { parseKV } from '.'
+import { parseKV, parseBoolean } from '.'
+import { APTBase } from './base'
 import type { IRelease, ReleaseHash } from './release.d'
 
 /**
@@ -10,7 +11,7 @@ import type { IRelease, ReleaseHash } from './release.d'
  * To meet the needs of many people, `apt-parser` will handle documented keys both ways.
  * It will populate the strictly typed fields and also leave the raw-string value and key.
  */
-export class Release implements IRelease {
+export class Release extends APTBase implements IRelease {
 	// Begin Raw Implementation
 		architectures: string[]
 		noSupportForArchitectureAll?: boolean | undefined
@@ -35,20 +36,17 @@ export class Release implements IRelease {
 	// End Raw Implementation
 
 	/**
-	 * Raw-accessible key-value map of the APT format
-	 */
-	private raw: Map<string, string>
-
-	/**
 	 * Create a type-safe Release object and populate its keys
 	 * @param {string} rawData Contents of a Release file from an APT repository
 	 */
 	constructor(rawData: string) {
+		super()
+
 		const map = parseKV(rawData)
 		this.raw = map
 
 		this.architectures = map.get('Architectures')!.trim().split(' ')
-		this.noSupportForArchitectureAll = this.parseBoolean(map.get('No-Support-For-Architecture-All')?.trim())
+		this.noSupportForArchitectureAll = parseBoolean(map.get('No-Support-For-Architecture-All')?.trim())
 
 		this.description = map.get('Description')?.trim()
 		this.origin = map.get('Origin')?.trim()
@@ -64,11 +62,11 @@ export class Release implements IRelease {
 		this.validUntil = map.get('Valid-Until') ? new Date(map.get('Valid-Until')!) : undefined
 		this.components = map.get('Components')!.trim().split(' ')
 
-		this.notAutomatic = this.parseBoolean(map.get('NotAutomatic')?.trim())
-		this.butAutomaticUpgrades = this.parseBoolean(map.get('ButAutomaticUpgrades')?.trim())
-		this.acquireByHash = this.parseBoolean(map.get('Acquire-By-Hash')?.trim())
+		this.notAutomatic = parseBoolean(map.get('NotAutomatic')?.trim())
+		this.butAutomaticUpgrades = parseBoolean(map.get('ButAutomaticUpgrades')?.trim())
+		this.acquireByHash = parseBoolean(map.get('Acquire-By-Hash')?.trim())
 		this.signedBy = map.get('Signed-By')?.split(',')
-		this.packagesRequireAuthorization = this.parseBoolean(map.get('Packages-Require-Authorization')?.trim())
+		this.packagesRequireAuthorization = parseBoolean(map.get('Packages-Require-Authorization')?.trim())
 
 		// Let's make hashes into an object with all files
 		const hashes = ['SHA1', 'MD5Sum', 'SHA256', 'SHA512']
@@ -96,23 +94,6 @@ export class Release implements IRelease {
 	}
 
 	/**
-	 * Get a raw string value from the Release contents
-	 * @param {string} key Release field name to search for
-	 * @returns {string?} Field value
-	 */
-	get(key: string): string | undefined {
-		return this.raw.get(key)
-	}
-
-	/**
-	 * Retrieve the number of fields defined in the Release contents
-	 * @returns {number} Field count
-	 */
-	get fieldCount(): number {
-		return this.raw.size
-	}
-
-	/**
 	 * Convert APT Release hash keys to the appropriate ones on this class
 	 * @param {string} key Release hash key
 	 * @returns {string?} Class property name
@@ -125,21 +106,6 @@ export class Release implements IRelease {
 			case 'SHA256':
 			case 'SHA512':
 				return key.toLowerCase()
-		}
-	}
-
-	/**
-	 * Parses the APT format for a boolean
-	 * @param {string?} value Optional value of yes/no
-	 * @returns {boolean?} true/false or undefined if the supplied value is undefined
-	 */
-	private parseBoolean(value?: string): boolean | undefined {
-		if (value === 'yes') {
-			return true
-		}
-
-		if (value === 'no') {
-			return false
 		}
 	}
 }

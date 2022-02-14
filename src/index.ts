@@ -65,6 +65,21 @@ export function parseKV(data: string) {
 }
 
 /**
+ * Parses the APT format for a boolean
+ * @param {string?} value Optional value of yes/no
+ * @returns {boolean?} true/false or undefined if the supplied value is undefined
+ */
+export function parseBoolean(value?: string): boolean | undefined {
+	if (value === 'yes') {
+		return true
+	}
+
+	if (value === 'no') {
+		return false
+	}
+}
+
+/**
  * Parse raw file contents of a packages file and retrieve a map of keys and values
  *
  * @param data Raw string contents from a Packages file
