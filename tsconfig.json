@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./src",
 		"rootDir": "./src",
 		"outDir": "./dist",
 		"target": "ESNext",

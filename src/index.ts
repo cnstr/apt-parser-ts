@@ -1,4 +1,4 @@
-export * from 'release'
+export * from './release'
 
 /**
  * Parse raw file contents that conform to the APT key-value format

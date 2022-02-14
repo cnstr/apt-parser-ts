@@ -1,5 +1,5 @@
 import { parseKV } from '.'
-import type { IRelease, ReleaseHash } from 'release.d'
+import type { IRelease, ReleaseHash } from './release.d'
 
 /**
  * Class representing a release file
