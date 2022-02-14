@@ -56,7 +56,6 @@ export function parseKV(data: string) {
 		previousKey = key
 	}
 
-
 	return fields
 }
 
