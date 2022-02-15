@@ -1,4 +1,5 @@
 export * from './control'
+export * from './packages'
 export * from './release'
 
 /**
@@ -83,6 +84,7 @@ export function parseBoolean(value?: string): boolean | undefined {
 /**
  * Parse raw file contents of a packages file and retrieve a map of keys and values
  *
+ * @deprecated Use the `Packages` class instead
  * @param data Raw string contents from a Packages file
  * @returns Map of string keys and values
  */
@@ -95,6 +97,7 @@ export function parsePackages(data: string) {
 /**
  * Parse raw file contents of a control file and retrieve a map of keys and values
  *
+ * @deprecated Use the `Control` class instead
  * @param data Raw string contents from a control file
  * @returns Map of string keys and values
  */
