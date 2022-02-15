@@ -1,6 +1,6 @@
-import type { IControl } from './control.d'
+import type { IBinaryControl } from './control.d'
 
-interface IPackage extends IControl {
+interface IPackage extends IBinaryControl {
 	/**
 	 * A string depicting the file location of the package.
 	 *

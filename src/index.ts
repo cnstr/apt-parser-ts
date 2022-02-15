@@ -97,7 +97,7 @@ export function parsePackages(data: string) {
 /**
  * Parse raw file contents of a control file and retrieve a map of keys and values
  *
- * @deprecated Use the `Control` class instead
+ * @deprecated Use the `BinaryControl` class instead
  * @param data Raw string contents from a control file
  * @returns Map of string keys and values
  */

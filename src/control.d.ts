@@ -8,7 +8,7 @@ export interface MaintainerField {
 	website?: string
 }
 
-export interface IControl {
+export interface IBinaryControl {
 	/**
 	 * A string depicting the name of the package.
 	 *

@@ -1,4 +1,4 @@
-import type { IControl, PackageType, PriorityLevel } from './control.d'
+import type { IBinaryControl, PackageType, PriorityLevel } from './control.d'
 import { parseBoolean, parseKV } from '.'
 import { APTBase } from './base'
 
@@ -11,7 +11,7 @@ import { APTBase } from './base'
  * To meet the needs of many people, `apt-parser` will handle documented keys both ways.
  * It will populate the strictly typed fields and also leave the raw-string value and key.
  */
-export class Control extends APTBase implements IControl {
+export class BinaryControl extends APTBase implements IBinaryControl {
 	// Begin Raw Implementation
 		package: string
 		source?: string | undefined
@@ -61,7 +61,7 @@ export class Control extends APTBase implements IControl {
 		this.replaces = map.get('Replaces')?.trim().split(', ')
 		this.enhances = map.get('Enhances')?.trim().split(', ')
 		this.breaks = map.get('Breaks')?.trim().split(', ')
-		this.conflicts = map.get('Conficts')?.trim().split(', ')
+		this.conflicts = map.get('Conflicts')?.trim().split(', ')
 
 		const installedSize = parseInt(map.get('Installed-Size')?.trim() ?? '0')
 		this.installedSize = installedSize !== 0 ? installedSize : undefined
