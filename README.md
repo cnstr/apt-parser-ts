@@ -88,32 +88,32 @@ For more information on the Debian Control Format, see https://www.debian.org/do
 
 ```ts
 interface IBinaryControl {
-	package: string               // => Package
-	source?: string               // => Source
-	version: string               // => Version
-	section?: string              // => Section
-	priority?: PriorityLevel      // => Priority
-	architecture: string          // => Architecture
-	essential?: boolean           // => Essential
+	package: string                       // => Package
+	source?: string                       // => Source
+	version: string                       // => Version
+	section?: string                      // => Section
+	priority?: PriorityLevel              // => Priority
+	architecture: string                  // => Architecture
+	essential?: boolean                   // => Essential
 
-	depends?: string[]            // => Depends
-	preDepends?: string[]         // => Pre-Depends
-	recommends?: string[]         // => Recommends
-	suggests?: string[]           // => Suggests
-	replaces?: string[]           // => Replaces
-	enhances?: string[]           // => Enhances
-	breaks?: string[]             // => Breaks
-	conflicts?: string[]          // => Conflicts
+	depends?: string[]                    // => Depends
+	preDepends?: string[]                 // => Pre-Depends
+	recommends?: string[]                 // => Recommends
+	suggests?: string[]                   // => Suggests
+	replaces?: string[]                   // => Replaces
+	enhances?: string[]                   // => Enhances
+	breaks?: string[]                     // => Breaks
+	conflicts?: string[]                  // => Conflicts
 
-	installedSize?: number         // => Installed-Size
-	maintainer: string            // => Maintainer
-	description: string           // => Description
-	homepage?: string             // => Homepage
-	builtUsing?: string           // => Built-Using
-	packageType?: PackageType     // => Package-Type
+	installedSize?: number               // => Installed-Size
+	maintainer: string                    // => Maintainer
+	description: string                   // => Description
+	homepage?: string                     // => Homepage
+	builtUsing?: string                   // => Built-Using
+	packageType?: PackageType             // => Package-Type
 
 	get(key: string): string | undefined  // => Retrieve a raw field value not assigned a strict type
-	get fieldCount(): number              // => Get total number of fields in the Release contents
+	get fieldCount(): number              // => Get total number of fields in the control contents
 }
 ```
 
@@ -137,16 +137,16 @@ For more information on the Debian Repository Format, see https://wiki.debian.or
 
 ```ts
 interface IPackage extends IBinaryControl {
-	filename: string           // => Filename
-	size: number               // => Size
-	md5?: string               // => MD5sum
-	sha1?: string              // => SHA1
-	sha256?: string            // => SHA256
-	sha512?: string            // => SHA512
-	descriptionMd5?: string    // => Description-md5
+	filename: string                      // => Filename
+	size: number                          // => Size
+	md5?: string                          // => MD5sum
+	sha1?: string                         // => SHA1
+	sha256?: string                       // => SHA256
+	sha512?: string                       // => SHA512
+	descriptionMd5?: string               // => Description-md5
 
 	get(key: string): string | undefined  // => Retrieve a raw field value not assigned a strict type
-	get fieldCount(): number              // => Get total number of fields in the Release contents
+	get fieldCount(): number              // => Get total number of fields in the package contents
 }
 
 interface IPackages extends Array<IPackage> {
