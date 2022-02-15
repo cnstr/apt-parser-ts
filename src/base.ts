@@ -13,8 +13,8 @@ export class APTBase {
 	}
 
 	/**
-	 * Get a raw string value from the Release contents
-	 * @param {string} key Release field name to search for
+	 * Get a raw string value from the raw contents
+	 * @param {string} key raw field name to search for
 	 * @returns {string?} Field value
 	 */
 	 get(key: string): string | undefined {
@@ -22,7 +22,7 @@ export class APTBase {
 	}
 
 	/**
-	 * Retrieve the number of fields defined in the Release contents
+	 * Retrieve the number of fields defined in the raw contents
 	 * @returns {number} Field count
 	 */
 	get fieldCount(): number {
