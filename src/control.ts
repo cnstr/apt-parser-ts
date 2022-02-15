@@ -2,6 +2,15 @@ import type { IControl, PackageType, PriorityLevel } from './control.d'
 import { parseBoolean, parseKV } from '.'
 import { APTBase } from './base'
 
+/**
+ * Class representing a binary control file
+ *
+ * For keys that are documented by Debian, we can do some strict type inference.
+ * See: https://www.debian.org/doc/debian-policy/ch-controlfields.html
+ *
+ * To meet the needs of many people, `apt-parser` will handle documented keys both ways.
+ * It will populate the strictly typed fields and also leave the raw-string value and key.
+ */
 export class Control extends APTBase implements IControl {
 	// Begin Raw Implementation
 		package: string
