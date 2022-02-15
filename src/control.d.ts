@@ -1,5 +1,12 @@
-export type PriorityLevel = 'required' | 'important' | 'standard' | 'optional' | 'extra' | string
-export type PackageType = 'deb' | 'udeb' | string
+export type PriorityLevel = 'required' | 'important' | 'standard' | 'optional' | 'extra'
+export type PackageType = 'deb' | 'udeb'
+
+// TODO: ^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)
+export interface MaintainerField {
+	name: string
+	email?: string
+	website?: string
+}
 
 export interface IControl {
 	package: string               // => Package
@@ -14,6 +21,7 @@ export interface IControl {
 	preDepends?: string[]         // => Pre-Depends
 	recommends?: string[]         // => Recommends
 	suggests?: string[]           // => Suggests
+	replaces?: string[]           // => Replaces
 	enhances?: string[]           // => Enhances
 	breaks?: string[]             // => Breaks
 	conflicts?: string[]          // => Conflicts
