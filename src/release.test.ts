@@ -1,7 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { Release } from '.'
 
-
 test('release:chariz', async () => {
 	const data = await readFile('test/chariz.release', 'utf8')
 	const release = new Release(data)
