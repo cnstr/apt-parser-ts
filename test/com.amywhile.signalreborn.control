@@ -1,0 +1,16 @@
+Package: com.amywhile.signalreborn
+Name: SignalReborn
+Architecture: iphoneos-arm
+Description: Visualise your nearby cell towers
+Depends: firmware (>= 12.2) | org.swift.libswift
+Conflicts: com.charliewhile.signalreborn
+Replaces: com.charliewhile.signalreborn
+Breaks: com.charliewhile.signalreborn
+Author: Amy While <support@anamy.gay>
+Maintainer: Amy While <support@anamy.gay>
+Section: Applications
+Version: 2.2.1-2
+Tag: compatible_min::ios11.0
+Icon: https://img.chariz.cloud/icon/signal/icon@3x.png
+Depiction: https://chariz.com/get/signal
+Installed-Size: 1536
