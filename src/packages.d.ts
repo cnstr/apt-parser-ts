@@ -25,7 +25,7 @@ interface IPackage extends IControl {
 	/**
 	 * Optional list of MD5 file hashes.
 	 *
-	 * Represents the `MD5Sum` key on the Release contents.
+	 * Represents the `MD5sum` key on the Release contents.
 	 *
 	 * For the technical specification, see:
 	 * https://wiki.debian.org/DebianRepository/Format#Size.2C_MD5sum.2C_SHA1.2C_SHA256.2C_SHA512

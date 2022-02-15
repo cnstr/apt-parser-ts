@@ -31,7 +31,7 @@ class Package extends Control implements IPackage {
 		this.filename = this.raw.get('Filename')!.trim()
 		this.size = parseFloat(this.raw.get('Size')!.trim())
 
-		this.md5 = this.raw.get('MD5Sum')?.trim()
+		this.md5 = this.raw.get('MD5sum')?.trim()
 		this.sha1 = this.raw.get('SHA1')?.trim()
 		this.sha256 = this.raw.get('SHA256')?.trim()
 		this.sha512 = this.raw.get('SHA512')?.trim()
