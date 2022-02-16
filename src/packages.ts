@@ -124,6 +124,12 @@ export class Packages extends Array<Package> {
 	constructor(rawData: string) {
 		const cleanedData = rawData.replaceAll(/\r\n|\r|\n/g, '\n').replaceAll(/\0/g, '').normalize().trim()
 		const packageChunks = cleanedData.split('\n\n') // We know it will always be \n\n because of our cleanup
-		super(...packageChunks.map(chunk => new Package(chunk)))
+
+		const cleanedArray = packageChunks.map(chunk => {
+			if (chunk.trim().length > 0) {
+				return new Package(chunk)
+			}
+		}).filter(item => item) as Package[]
+		super(...cleanedArray)
 	}
 }
