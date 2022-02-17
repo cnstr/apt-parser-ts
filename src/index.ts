@@ -1,3 +1,5 @@
+import { CaseCopyMap } from './base'
+
 export * from './control'
 export * from './packages'
 export * from './release'
@@ -11,7 +13,7 @@ export function parseKV(data: string) {
 	const cleanedData = data.replaceAll(/\r\n|\r|\n/g, '\n').replaceAll(/\0/g, '').normalize().trim()
 	const lineChunks = cleanedData.split('\n') // We know it will always be \n because of our cleanup
 
-	const fields = new Map<string, string>()
+	const fields = new CaseCopyMap()
 	let previousKey = ''
 
 	for (const line of lineChunks) {
