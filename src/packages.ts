@@ -1,6 +1,6 @@
 import { BinaryControl, IBinaryControl } from '.'
 
-interface IPackage extends IBinaryControl {
+export interface IPackage extends IBinaryControl {
 	/**
 	 * A string depicting the file location of the package.
 	 *
@@ -82,7 +82,7 @@ interface IPackage extends IBinaryControl {
  * To meet the needs of many people, `apt-parser` will handle documented keys both ways.
  * It will populate the strictly typed fields and also leave the raw-string value and key.
  */
-class Package extends BinaryControl implements IPackage {
+export class Package extends BinaryControl implements IPackage {
 	// Begin Raw Implementation
 	filename: string
 	size: number
