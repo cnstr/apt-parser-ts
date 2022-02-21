@@ -12,7 +12,6 @@ export class CaseCopyMap extends Map<string, string> {
 		if (actualKey) return super.get(actualKey)
 	}
 
-
 	public get size() : number {
 		return super.size / 2
 	}
@@ -38,8 +37,23 @@ export class APTBase {
 	 * @param {string} key raw field name to search for
 	 * @returns {string?} Field value
 	 */
-	 get(key: string): string | undefined {
+	get(key: string): string | undefined {
 		return this.raw.get(key)
+	}
+
+	/**
+	 * Iterate through all keys and values from the raw contents
+	 * @returns IterableIterator of all keys and values
+	 */
+	entries(): IterableIterator<[string, string]> {
+		const builder: [string, string][] = []
+		for (const [key, value] of this.raw.entries()) {
+			if (!key.startsWith('case_copying')) {
+				builder.push([key, value])
+			}
+		}
+
+		return builder[Symbol.iterator]()
 	}
 
 	/**
