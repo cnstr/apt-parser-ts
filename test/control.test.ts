@@ -1,8 +1,8 @@
 import { readFile } from 'node:fs/promises'
-import { BinaryControl } from '.'
+import { BinaryControl } from '../src'
 
 test('control:clang', async () => {
-	const data = await readFile('test/clang.control', 'utf8')
+	const data = await readFile('test/files/clang.control', 'utf8')
 	const control = new BinaryControl(data)
 
 	expect(control.package).toEqual('clang')
@@ -39,7 +39,7 @@ test('control:clang', async () => {
 })
 
 test('control:com.amywhile.signalreborn', async () => {
-	const data = await readFile('test/com.amywhile.signalreborn.control', 'utf8')
+	const data = await readFile('test/files/com.amywhile.signalreborn.control', 'utf8')
 	const control = new BinaryControl(data)
 
 	expect(control.package).toEqual('com.amywhile.signalreborn')

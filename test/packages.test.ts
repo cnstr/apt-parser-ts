@@ -1,8 +1,8 @@
 import { readFile } from 'node:fs/promises'
-import { Packages } from '.'
+import { Packages } from '../src'
 
 test('chariz:packages', async () => {
-	const data = await readFile('test/chariz.packages', 'utf8')
+	const data = await readFile('test/files/chariz.packages', 'utf8')
 	const packages = new Packages(data)
 	const pkg = packages[0]
 
@@ -32,7 +32,7 @@ test('chariz:packages', async () => {
 })
 
 test('jammy:packages', async () => {
-	const data = await readFile('test/jammy.packages', 'utf8')
+	const data = await readFile('test/files/jammy.packages', 'utf8')
 	const packages = new Packages(data)
 	const pkg = packages[0]
 

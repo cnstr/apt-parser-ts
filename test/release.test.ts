@@ -1,8 +1,8 @@
 import { readFile } from 'node:fs/promises'
-import { Release } from '.'
+import { Release } from '../src'
 
 test('release:chariz', async () => {
-	const data = await readFile('test/chariz.release', 'utf8')
+	const data = await readFile('test/files/chariz.release', 'utf8')
 	const release = new Release(data)
 
 	expect(release.fieldCount).toEqual(11)
@@ -32,7 +32,7 @@ test('release:chariz', async () => {
 })
 
 test('release:jammy', async () => {
-	const data = await readFile('test/jammy.release', 'utf8')
+	const data = await readFile('test/files/jammy.release', 'utf8')
 	const release = new Release(data)
 
 	expect(release.fieldCount).toEqual(13)
