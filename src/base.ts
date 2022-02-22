@@ -1,3 +1,5 @@
+import { MissingRequiredKeyError } from "./error"
+
 export class CaseCopyMap extends Map<string, string> {
 	set(key: string, value: string): this {
 		super.set(`case_copying${key.toLowerCase()}`, key)
@@ -24,12 +26,26 @@ export class APTBase {
 	 */
 	protected raw: CaseCopyMap
 
+
+	/**
+	 * Raw-accessible list of the required APT keys
+	 */
+	protected required: string[]
+
 	/**
 	 * Base constructor.
 	 * This should never be used.
 	 */
-	constructor() {
+	constructor(required: string[]) {
 		this.raw = new CaseCopyMap()
+		this.required = required
+
+		for (const key of this.required) {
+			if (!this.raw.has(key)) {
+				throw new MissingRequiredKeyError(key)
+			}
+		}
+
 	}
 
 	/**

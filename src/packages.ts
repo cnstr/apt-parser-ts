@@ -99,6 +99,10 @@ export class Package extends BinaryControl implements IPackage {
 	 */
 	constructor(rawData: string) {
 		super(rawData)
+		super.required = [
+			'Filename',
+			'Size'
+		]
 
 		this.filename = this.raw.get('Filename')!.trim()
 		this.size = parseFloat(this.raw.get('Size')!.trim())

@@ -234,35 +234,41 @@ export interface IBinaryControl {
  */
 export class BinaryControl extends APTBase implements IBinaryControl {
 	// Begin Raw Implementation
-		package: string
-		source?: string | undefined
-		version: string
-		section?: string | undefined
-		priority?: PriorityLevel | undefined
-		architecture: string
-		essential?: boolean | undefined
-		depends?: string[] | undefined
-		preDepends?: string[] | undefined
-		recommends?: string[] | undefined
-		suggests?: string[] | undefined
-		replaces?: string[] | undefined
-		enhances?: string[] | undefined
-		breaks?: string[] | undefined
-		conflicts?: string[] | undefined
-		installedSize?: number | undefined
-		maintainer: string
-		description: string
-		homepage?: string | undefined
-		builtUsing?: string | undefined
-		packageType?: PackageType | undefined
+	package: string
+	source?: string | undefined
+	version: string
+	section?: string | undefined
+	priority?: PriorityLevel | undefined
+	architecture: string
+	essential?: boolean | undefined
+	depends?: string[] | undefined
+	preDepends?: string[] | undefined
+	recommends?: string[] | undefined
+	suggests?: string[] | undefined
+	replaces?: string[] | undefined
+	enhances?: string[] | undefined
+	breaks?: string[] | undefined
+	conflicts?: string[] | undefined
+	installedSize?: number | undefined
+	maintainer: string
+	description: string
+	homepage?: string | undefined
+	builtUsing?: string | undefined
+	packageType?: PackageType | undefined
 	// End Raw Implementation
 
 	/**
 	 * Create a type-safe Control object and populate its keys
 	 * @param {string} rawData Contents of a control file from a debian binary
 	 */
-	 constructor(rawData: string) {
-		super()
+	constructor(rawData: string) {
+		super([
+			'Package',
+			'Version',
+			'Architecture',
+			'Maintainer',
+			'Description'
+		])
 
 		const map = parseKV(rawData)
 		this.raw = map
