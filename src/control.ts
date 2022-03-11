@@ -262,16 +262,14 @@ export class BinaryControl extends APTBase implements IBinaryControl {
 	 * @param {string} rawData Contents of a control file from a debian binary
 	 */
 	constructor(rawData: string) {
-		super([
+		const map = parseKV(rawData)
+		super(map, [
 			'Package',
 			'Version',
 			'Architecture',
 			'Maintainer',
 			'Description'
 		])
-
-		const map = parseKV(rawData)
-		this.raw = map
 
 		this.package = map.get('Package')!.trim()
 		this.source = map.get('Source')?.trim()

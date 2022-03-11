@@ -259,13 +259,12 @@ export class Release extends APTBase implements IRelease {
 	 * @param {string} rawData Contents of a Release file from an APT repository
 	 */
 	constructor(rawData: string) {
-		super([
+		const map = parseKV(rawData)
+
+		super(map, [
 			'Architectures',
 			'Components'
 		])
-
-		const map = parseKV(rawData)
-		this.raw = map
 
 		this.architectures = map.get('Architectures')!.trim().split(' ')
 		this.noSupportForArchitectureAll = parseBoolean(map.get('No-Support-For-Architecture-All')?.trim())

@@ -36,8 +36,8 @@ export class APTBase {
 	 * Base constructor.
 	 * This should never be used.
 	 */
-	constructor(required: string[]) {
-		this.raw = new CaseCopyMap()
+	constructor(raw: CaseCopyMap, required: string[]) {
+		this.raw = raw
 		this.required = required
 
 		for (const key of this.required) {
