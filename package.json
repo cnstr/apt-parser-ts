@@ -1,6 +1,6 @@
 {
 	"name": "apt-parser",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"description": "Parse APT's key-value files and retrieve all the values as a Map",
 	"author": "Canister <support@canister.me> (https://canister.me)",
 	"contributors": [
