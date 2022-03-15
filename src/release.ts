@@ -1,5 +1,5 @@
 import { parseKV, parseBoolean } from '.'
-import { APTBase } from './base'
+import { APTBase, ParserOptions } from './base'
 
 export type ReleaseHash = {
 	/**
@@ -257,16 +257,17 @@ export class Release extends APTBase implements IRelease {
 	/**
 	 * Create a type-safe Release object and populate its keys
 	 * @param {string} rawData Contents of a Release file from an APT repository
+	 * @param {ParserOptions} options Optional object for modifying options when constructing
 	 */
-	constructor(rawData: string) {
+	constructor(rawData: string, options?: ParserOptions) {
 		const map = parseKV(rawData)
 
-		super(map, [
+		super(map, options?.skipValidation ? [] : [
 			'Architectures',
 			'Components'
 		])
 
-		this.architectures = map.get('Architectures')!.trim().split(' ')
+		this.architectures = map.get('Architectures')?.trim().split(' ') ?? []
 		this.noSupportForArchitectureAll = parseBoolean(map.get('No-Support-For-Architecture-All')?.trim())
 
 		this.description = map.get('Description')?.trim()
@@ -281,7 +282,7 @@ export class Release extends APTBase implements IRelease {
 		this.version = map.get('Version')?.trim()
 		this.date = map.get('Date') ? new Date(map.get('Date')!) : undefined
 		this.validUntil = map.get('Valid-Until') ? new Date(map.get('Valid-Until')!) : undefined
-		this.components = map.get('Components')!.trim().split(' ')
+		this.components = map.get('Components')?.trim().split(' ') ?? []
 
 		this.notAutomatic = parseBoolean(map.get('NotAutomatic')?.trim())
 		this.butAutomaticUpgrades = parseBoolean(map.get('ButAutomaticUpgrades')?.trim())

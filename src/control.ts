@@ -1,5 +1,5 @@
 import { parseBoolean, parseKV } from '.'
-import { APTBase } from './base'
+import { APTBase, ParserOptions } from './base'
 
 export type PriorityLevel = 'required' | 'important' | 'standard' | 'optional' | 'extra'
 export type PackageType = 'deb' | 'udeb'
@@ -260,10 +260,11 @@ export class BinaryControl extends APTBase implements IBinaryControl {
 	/**
 	 * Create a type-safe Control object and populate its keys
 	 * @param {string} rawData Contents of a control file from a debian binary
+	 * @param {ParserOptions} options Optional object for modifying options when constructing
 	 */
-	constructor(rawData: string) {
+	constructor(rawData: string, options?: ParserOptions) {
 		const map = parseKV(rawData)
-		super(map, [
+		super(map, options?.skipValidation ? [] : [
 			'Package',
 			'Version',
 			'Architecture',
@@ -271,12 +272,12 @@ export class BinaryControl extends APTBase implements IBinaryControl {
 			'Description'
 		])
 
-		this.package = map.get('Package')!.trim()
+		this.package = map.get('Package')?.trim() ?? ''
 		this.source = map.get('Source')?.trim()
-		this.version = map.get('Version')!.trim()
+		this.version = map.get('Version')?.trim() ?? ''
 		this.section = map.get('Section')?.trim()
 		this.priority = map.get('Priority')?.trim() as PriorityLevel
-		this.architecture = map.get('Architecture')!.trim()
+		this.architecture = map.get('Architecture')?.trim() ?? ''
 		this.essential = parseBoolean(map.get('NotAutomatic')?.trim())
 
 		this.depends = map.get('Depends')?.trim().split(', ')
@@ -290,8 +291,8 @@ export class BinaryControl extends APTBase implements IBinaryControl {
 
 		const installedSize = parseInt(map.get('Installed-Size')?.trim() ?? '0')
 		this.installedSize = installedSize !== 0 ? installedSize : undefined
-		this.maintainer = map.get('Maintainer')!.trim()
-		this.description = map.get('Description')!
+		this.maintainer = map.get('Maintainer')?.trim() ?? ''
+		this.description = map.get('Description') ?? ''
 		this.homepage = map.get('Homepage')?.trim()
 		this.builtUsing = map.get('Built-Using')?.trim()
 		this.packageType = map.get('Package-Type')?.trim() as PackageType

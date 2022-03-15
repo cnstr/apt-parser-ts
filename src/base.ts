@@ -2,7 +2,7 @@ import { MissingRequiredKeyError } from "./error"
 
 export class CaseCopyMap extends Map<string, string> {
 	set(key: string, value: string): this {
-		super.set(`case_copying${key.toLowerCase()}`, key)
+		super.set(`cased_${key.toLowerCase()}`, key)
 		return super.set(key, value)
 	}
 
@@ -10,14 +10,23 @@ export class CaseCopyMap extends Map<string, string> {
 		if (super.has(key)) return super.get(key)
 
 		// Handle case insensitivity
-		const actualKey = super.get(`case_copying${key.toLowerCase()}`)
+		const actualKey = super.get(`cased_${key.toLowerCase()}`)
 		if (actualKey) return super.get(actualKey)
 	}
 
 	public get size() : number {
 		return super.size / 2
 	}
+}
 
+/**
+ * Modifiers to the APT constructors
+ */
+export interface ParserOptions {
+	/**
+	 * Disables the APT key validations based on the Debian documentation site.
+	 */
+	skipValidation?: boolean
 }
 
 export class APTBase {
@@ -45,7 +54,6 @@ export class APTBase {
 				throw new MissingRequiredKeyError(key)
 			}
 		}
-
 	}
 
 	/**
@@ -64,7 +72,7 @@ export class APTBase {
 	entries(): IterableIterator<[string, string]> {
 		const builder: [string, string][] = []
 		for (const [key, value] of this.raw.entries()) {
-			if (!key.startsWith('case_copying')) {
+			if (!key.startsWith('cased_')) {
 				builder.push([key, value])
 			}
 		}

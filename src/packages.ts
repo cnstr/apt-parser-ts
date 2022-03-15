@@ -1,4 +1,5 @@
 import { BinaryControl, IBinaryControl } from '.'
+import { ParserOptions } from './base'
 
 export interface IPackage extends IBinaryControl {
 	/**
@@ -96,16 +97,17 @@ export class Package extends BinaryControl implements IPackage {
 	/**
 	 * Create a type-safe Control object and populate its keys
 	 * @param {string} rawData Contents of a control file from a debian binary
+	 * @param {ParserOptions} options Optional object for modifying options when constructing
 	 */
-	constructor(rawData: string) {
+	constructor(rawData: string, options?: ParserOptions) {
 		super(rawData)
-		super.required = [
+		super.required = options?.skipValidation ? [] : [
 			'Filename',
 			'Size'
 		]
 
-		this.filename = this.raw.get('Filename')!.trim()
-		this.size = parseFloat(this.raw.get('Size')!.trim())
+		this.filename = this.raw.get('Filename')?.trim() ?? ''
+		this.size = parseFloat(this.raw.get('Size')?.trim() ?? '0')
 
 		this.md5 = this.raw.get('MD5sum')?.trim()
 		this.sha1 = this.raw.get('SHA1')?.trim()
