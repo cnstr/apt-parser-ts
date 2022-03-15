@@ -100,7 +100,7 @@ export class Package extends BinaryControl implements IPackage {
 	 * @param {ParserOptions} options Optional object for modifying options when constructing
 	 */
 	constructor(rawData: string, options?: ParserOptions) {
-		super(rawData)
+		super(rawData, options)
 		super.required = options?.skipValidation ? [] : [
 			'Filename',
 			'Size'
