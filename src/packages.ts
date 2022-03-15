@@ -127,14 +127,14 @@ export class Package extends BinaryControl implements IPackage {
  * It will populate the strictly typed fields and also leave the raw-string value and key.
  */
 export class Packages extends Array<Package> {
-	constructor(args: string) {
+	constructor(args: string, options?: ParserOptions) {
 		if (typeof args === 'string') {
 			const cleanedData = args.replaceAll(/\r\n|\r|\n/g, '\n').replaceAll(/\0/g, '').normalize().trim()
 			const packageChunks = cleanedData.split('\n\n') // We know it will always be \n\n because of our cleanup
 
 			const cleanedArray = packageChunks.map(chunk => {
 				if (chunk.trim().length > 0) {
-					return new Package(chunk)
+					return new Package(chunk, options)
 				}
 			}).filter(item => item) as Package[]
 			super(...cleanedArray)
