@@ -153,3 +153,18 @@ interface IPackages extends Array<IPackage> {
 	constructor(rawData: string) // Pass in the raw contents of the file
 }
 ```
+
+### Skipping Validation
+The parser validates required fields based on the parameters defined by the Debian Team on their documentation pages. Disabling this validation is possible, but it is not recommended if you are parsing valid repositories.
+
+Disabling this validation will stop the APT parser from throwing any `MissingRequiredKeyError`s. It is disabled through an option when constructing your parser.
+
+```ts
+import axios from 'axios';
+import { Packages } from 'apt-parser';
+
+const { data } = await axios.get('https://repo.chariz.com/Packages');
+const packages = new Packages(data, {
+	skipValidation: true
+});
+```
