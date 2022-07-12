@@ -1,5 +1,5 @@
 {
-	"exclude": ["test", "dist"],
+	"exclude": ["test", "vitest.config.ts"],
 	"compilerOptions": {
 		"rootDir": "./src",
 		"outDir": "./dist",

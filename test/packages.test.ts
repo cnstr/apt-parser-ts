@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { Packages } from '../src'
+import { test, expect } from 'vitest'
 
 test('chariz:packages', async () => {
 	const data = await readFile('test/files/chariz.packages', 'utf8')

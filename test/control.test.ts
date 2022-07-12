@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { BinaryControl } from '../src'
+import { test, expect } from 'vitest'
 
 test('control:clang', async () => {
 	const data = await readFile('test/files/clang.control', 'utf8')
