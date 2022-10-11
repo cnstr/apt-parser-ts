@@ -21,7 +21,7 @@
 		"build": "tsup ./src/index.ts --format cjs,esm --dts --clean",
 		"prepublishOnly": "pnpm run build",
 		"push": "np",
-		"test": "jest"
+		"test": "vitest run"
 	},
 	"keywords": [
 		"apt",
