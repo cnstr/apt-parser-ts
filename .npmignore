@@ -1,6 +1,6 @@
 node_modules/
 test/
 src/
-jest.config.js
+vitest.config.ts
 pnpm-lock.yaml
 tsconfig.json
